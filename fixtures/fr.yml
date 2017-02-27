@@ -1,0 +1,8 @@
+fr:
+  hello_msg: Bonjour tout le monde
+  age: 123
+  amount: 12.33
+  header:
+    menu:
+      home: Accueil
+      about: A propos
