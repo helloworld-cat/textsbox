@@ -1,3 +1,6 @@
+## About
+Simple and easy lib. to manage translations and texts, with cache, in Go project.
+
 ## Installation
 ```bash
 go get -u github.com/pagedegeek/textsbox
@@ -6,6 +9,7 @@ go get -u github.com/pagedegeek/textsbox
 ## Usage
 
 ```go
+// main.go
 package main
 
 import (
@@ -31,9 +35,17 @@ func main() {
 ```
 
 ```yaml
+# config/locales/en.yml
 en:
   messages:
     welcome: Hello World !
+```
+
+```yaml
+# config/locales/fr.yml
+fr:
+  messages:
+    welcome: Bonjour tout le monde !
 ```
 
 
