@@ -2,6 +2,7 @@
 Simple and easy lib. to manage translations and texts, with cache, in Go project.
 
 ## Installation
+
 ```bash
 go get -u github.com/pagedegeek/textsbox
 ```
@@ -48,4 +49,20 @@ fr:
     welcome: Bonjour tout le monde !
 ```
 
+## Other features
+
+### Load YAML content
+
+```go
+tb.LoadFile("...") // load from file
+```
+
+```go
+tb.Load(reader) // load from io.Reader
+```
+
+### Reset cache
+```go
+tb.ResetCache()
+```
 
