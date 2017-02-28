@@ -2,11 +2,12 @@ package textsbox
 
 import (
 	"fmt"
-	"gopkg.in/yaml.v2"
 	"io"
 	"io/ioutil"
 	"os"
 	"strings"
+
+	"gopkg.in/yaml.v2"
 )
 
 type TextsBox struct {
@@ -75,32 +76,33 @@ func (tb *TextsBox) Find(key, pattern string) (interface{}, error) {
 		return value, nil
 	}
 
+	patternPath := strings.Split(pattern, ".")
 	for _, ms := range tb.Data {
-		if value, err := find(pattern, ms); err == nil {
+		if value, err := find(patternPath, ms); err == nil {
 			tb.Cache[pattern] = value
 			return value, nil
 		}
 	}
-	return "", ErrNotFound{Pattern: pattern}
+	return "", ErrNotFound{PatternPath: patternPath}
 }
 
 type ErrNotFound struct {
-	Pattern string
+	PatternPath []string
 }
 
 func (e ErrNotFound) Error() string {
-	return fmt.Sprintf("Pattern `%s` not found", e.Pattern)
+	pattern := strings.Join(e.PatternPath, ".")
+	return fmt.Sprintf("Pattern `%s` not found", pattern)
 }
 
-func find(pattern string, ms yaml.MapSlice) (interface{}, error) {
-	fItems := strings.Split(pattern, ".")
+func find(patternPath []string, ms yaml.MapSlice) (interface{}, error) {
 	for _, item := range ms {
-		if item.Key.(string) == fItems[0] {
+		if item.Key.(string) == patternPath[0] {
 			if v, ok := item.Value.(yaml.MapSlice); ok {
-				return find(strings.Join(fItems[1:], "."), v)
+				return find(patternPath[1:], v)
 			}
 			return item.Value, nil
 		}
 	}
-	return "", ErrNotFound{Pattern: pattern}
+	return "", ErrNotFound{PatternPath: patternPath}
 }
