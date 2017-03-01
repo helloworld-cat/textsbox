@@ -2,9 +2,10 @@ package textsbox
 
 import (
 	"fmt"
-	"github.com/stretchr/testify/assert"
 	"os"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNew(t *testing.T) {
@@ -47,7 +48,8 @@ func TestFind(t *testing.T) {
 			"hello_msg": "Bonjour tout le monde",
 		},
 		"en": {
-			"hello_msg": "Hello World !",
+			"hello_msg":    "Hello World !",
+			"nested.value": "value",
 		},
 	}
 

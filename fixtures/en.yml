@@ -1,2 +1,4 @@
 en:
   hello_msg: Hello World !
+  nested:
+    value: value
